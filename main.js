@@ -19,10 +19,6 @@
         .then((data) => {
             const ulElement = document.getElementById('quiz-list');
             data.results.forEach((quiz, index) => {
-                // console.log(quiz);
-                // const keys = Object.keys(quiz);
-                // console.log(quiz[keys[0]]);
-
                 const liElement = document.createElement('li');
                 liElement.textContent = `${index + 1}件目のクイズデータ`;
                 liElement.appendChild(buildQuizList(quiz));
@@ -46,13 +42,12 @@
     const buildQuizList = (quiz) => {
         const quizPropUl = document.createElement('ul');
         const keys = Object.keys(quiz);
-        for (let i = 0; i < keys.length; i++) {
+        keys.forEach(quizPropName => {
             const quizPropLi = document.createElement('li');
-            const quizPropName = keys[i];
-            const quizPropValue = quiz[keys[i]];
+            const quizPropValue = quiz[quizPropName];
             quizPropLi.innerHTML = `<strong>${quizPropName}</strong>: ${quizPropValue}`;
             quizPropUl.appendChild(quizPropLi);
-        }
+        });
         return quizPropUl;
     };
 })();
